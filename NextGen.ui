@@ -24,11 +24,11 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
-      <string>Tab 1</string>
+      <string>AddMovie</string>
      </attribute>
      <widget class="QPlainTextEdit" name="plainTextEdit">
       <property name="geometry">
@@ -95,7 +95,7 @@
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>Tab 2</string>
+      <string>AddSeries</string>
      </attribute>
      <widget class="QPlainTextEdit" name="plainTextEdit_2">
       <property name="geometry">
@@ -154,6 +154,47 @@
       </property>
       <property name="text">
        <string>Add Series to Existing</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>WatchedToday</string>
+     </attribute>
+     <widget class="QPlainTextEdit" name="plainTextEdit_4">
+      <property name="geometry">
+       <rect>
+        <x>2</x>
+        <y>17</y>
+        <width>376</width>
+        <height>26</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>0</y>
+        <width>88</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Movie Title (Year)</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>2</x>
+        <y>47</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Publish</string>
       </property>
      </widget>
     </widget>

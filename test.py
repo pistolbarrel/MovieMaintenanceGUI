@@ -11,6 +11,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 
 
+def print_result(status_code, good_description):
+    if status_code == 200:
+        print(good_description)
+    else:
+        print("There was a problem.")
+
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
 
@@ -59,6 +66,20 @@ class Ui_MainWindow(object):
         self.pushButton_2.setGeometry(QtCore.QRect(2, 180, 115, 23))
         self.pushButton_2.setObjectName("pushButton_2")
         self.tabWidget.addTab(self.tab_2, "")
+        # tab 3
+        self.tab_3 = QtWidgets.QWidget()
+        self.tab_3.setObjectName(u"tab_3")
+        self.plainTextEdit_4 = QtWidgets.QPlainTextEdit(self.tab_3)
+        self.plainTextEdit_4.setObjectName(u"plainTextEdit_4")
+        self.plainTextEdit_4.setGeometry(QtCore.QRect(2, 17, 376, 26))
+        self.label_4 = QtWidgets.QLabel(self.tab_3)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setGeometry(QtCore.QRect(5, 0, 88, 16))
+        self.pushButton_3 = QtWidgets.QPushButton(self.tab_3)
+        self.pushButton_3.setObjectName(u"pushButton_3")
+        self.pushButton_3.setGeometry(QtCore.QRect(2, 47, 75, 23))
+        self.tabWidget.addTab(self.tab_3, "")
+
 
         # ########################################################
         MainWindow.setCentralWidget(self.centralwidget)
@@ -75,6 +96,8 @@ class Ui_MainWindow(object):
 
         self.pushButton_2.clicked.connect(self.tab2ButtonClicked)
 
+        self.pushButton_3.clicked.connect(self.tab3ButtonClicked)
+
     def retranslateUi(self, MainWindow):
 
         _translate = QtCore.QCoreApplication.translate
@@ -86,9 +109,13 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Series Name"))
         self.label_3.setText(_translate("MainWindow", "Movies in Series"))
         self.pushButton_2.setText(_translate("MainWindow", "Add Series to Existing"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", u"AddSeries"))
+        self.label_4.setText(_translate("MainWindow", u"Movie Title (Year)"))
+        self.pushButton_3.setText(_translate("MainWindow", u"Publish"))
 
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Add Movie"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Add Series to Existing"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", u"WatchedToday"))
 
     def tab1ButtonClicked(self):
 
@@ -105,10 +132,7 @@ class Ui_MainWindow(object):
         }
         a = 42
         response = requests.put(put_uri, json=movie_info)
-        if response.status_code == 200:
-            print("Movie created.")
-        else:
-            print("There was a problem.")
+        print_result(response.status_code, "Movie created.")
 
     def tab2ButtonClicked(self):
         put_uri = "http://localhost:8080/rest/updatecollectionsonexisting"
@@ -118,8 +142,18 @@ class Ui_MainWindow(object):
         }
         a = 42
         response = requests.put(put_uri, json=collections_info)
-        if response.status_code != 200:
-            print("There was a problem.")
+        print_result(response.status_code, "Collection added to existing movies.")
+
+    def tab3ButtonClicked(self):
+        put_uri = "http://localhost:8080/rest/viewedtoday"
+        collections_info = {
+            "titles": self.plainTextEdit_4.toPlainText(),
+            "collection": "Not Used in service"
+        }
+        a = 42
+        response = requests.put(put_uri, json=collections_info)
+        print_result(response.status_code, "Date added.")
+
 
 if __name__ == "__main__":
     import sys
