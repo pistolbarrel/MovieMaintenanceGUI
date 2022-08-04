@@ -104,6 +104,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Movie Maint"))
         self.dateEdit.setDisplayFormat(_translate("MainWindow", "yyyy-MM-dd"))
         self.checkBox.setText(_translate("MainWindow", "Absolute"))
+        self.checkBox.setToolTip("Check to remove all joined data and replace with Movie Text supplied.")
         self.pushButton.setText(_translate("MainWindow", "Add Movie"))
         self.label.setText(_translate("MainWindow", "Movie Text"))
         self.label_2.setText(_translate("MainWindow", "Series Name"))
