@@ -104,7 +104,8 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Movie Maint"))
         self.dateEdit.setDisplayFormat(_translate("MainWindow", "yyyy-MM-dd"))
         self.checkBox.setText(_translate("MainWindow", "Absolute"))
-        self.checkBox.setToolTip("Check to remove all joined data and replace with Movie Text supplied.")
+        self.checkBox.setToolTip("Check to remove all joined data and replace with Movie Text supplied. Required "
+                                 "if you want duration and description overwitten.")
         self.pushButton.setText(_translate("MainWindow", "Add Movie"))
         self.label.setText(_translate("MainWindow", "Movie Text"))
         self.label_2.setText(_translate("MainWindow", "Series Name"))
@@ -120,7 +121,7 @@ class Ui_MainWindow(object):
 
     def tab1ButtonClicked(self):
 
-        put_uri = "http://localhost:8080/rest/createamoviefromtext"
+        put_uri = "http://tower.local:8080/rest/createamoviefromtext"
         date_str = self.dateEdit.date().toString(Qt.ISODate)
         absolute_checked = self.checkBox.isChecked()
         if absolute_checked == True:
@@ -136,7 +137,7 @@ class Ui_MainWindow(object):
         print_result(response.status_code, "Movie created.")
 
     def tab2ButtonClicked(self):
-        put_uri = "http://localhost:8080/rest/updatecollectionsonexisting"
+        put_uri = "http://tower.local:8080/rest/updatecollectionsonexisting"
         collections_info = {
             "titles": self.plainTextEdit_3.toPlainText(),
             "collection": self.plainTextEdit_2.toPlainText()
@@ -146,7 +147,7 @@ class Ui_MainWindow(object):
         print_result(response.status_code, "Collection added to existing movies.")
 
     def tab3ButtonClicked(self):
-        put_uri = "http://localhost:8080/rest/viewedtoday"
+        put_uri = "http://tower.local:8080/rest/viewedtoday"
         collections_info = {
             "titles": self.plainTextEdit_4.toPlainText(),
             "collection": "Not Used in service"
